@@ -1,4 +1,4 @@
-import type {Metadata} from "next";import {ViewportGuard} from "@/components/viewport-guard";import "./globals.css";import "./responsive.css";import "./inspiration.css";
+import type {Metadata} from "next";import {ViewportGuard} from "@/components/viewport-guard";import "./globals.css";import "./responsive.css";import "./inspiration.css";import "./navbar-inspired.css";
 const description="Imboni uses AI to help attendees discover the photos they appear in across large event galleries. Join the waitlist for early access.";
 export const metadata:Metadata={title:"Imboni — Find Yourself in Every Event Photo",description,metadataBase:new URL("https://imboni.app"),openGraph:{title:"Imboni — Find Yourself in Every Event Photo",description,type:"website",siteName:"Imboni"},twitter:{card:"summary_large_image",title:"Imboni — Find Yourself in Every Event Photo",description},icons:{icon:"/favicon.svg"}};
 export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="en"><body><ViewportGuard/>{children}</body></html>}
