@@ -1,3 +1,23 @@
 "use client";
-import {motion} from "framer-motion";import {ArrowRight,Check,ScanFace} from "lucide-react";import {track} from "@/lib/analytics";
-export function Hero(){return <section id="top" className="hero shell"><motion.div className="hero-copy" initial={{opacity:0,y:22}} animate={{opacity:1,y:0}} transition={{duration:.65}}><p className="eyebrow"><span/> AI-powered photo discovery</p><h1>Find yourself in thousands of event photos. <em>Instantly.</em></h1><p className="lede">Imboni helps you discover every photo you appear in—without scrolling through endless event galleries.</p><div className="actions"><a className="button" href="#waitlist" onClick={()=>track("hero_waitlist_clicked",{location:"hero"})}>Join the waitlist <ArrowRight size={18}/></a><a className="text-link" href="#how-it-works" onClick={()=>track("how_it_works_clicked")}>See how it works</a></div><p className="trust"><Check size={15}/> Built for events, photographers and attendees.</p></motion.div><motion.div className="demo-card" initial={{opacity:0,scale:.94}} animate={{opacity:1,scale:1,rotate:1}} transition={{duration:.8,delay:.15}} aria-label="Illustration of Imboni finding matching event photos"><div className="demo-head"><div><span className="dot red"/><span className="dot amber"/><span className="dot green"/></div><span>IMBONI / PHOTO MATCH</span><span className="live">● AI SEARCHING</span></div><div className="demo-body"><div className="portrait"><div className="face"><ScanFace size={48}/><motion.span className="face-scan" animate={{top:["5%","90%","5%"]}} transition={{repeat:Infinity,duration:3,ease:"linear"}}/></div><small>YOUR PHOTO</small><strong>Ready to match</strong></div><div className="scan">{[0,1,2].map(i=><motion.span key={i} animate={{opacity:[.2,1,.2]}} transition={{repeat:Infinity,duration:1.2,delay:i*.2}}/>)}<b>Scanning gallery</b></div><div className="photo-grid">{[1,2,3,4,5,6,7,8,9].map((n)=><div key={n} className="photo">{[2,5,8].includes(n)&&<motion.i initial={{scale:0}} animate={{scale:1}} transition={{delay:.7+n*.12}}><Check size={11}/> MATCH</motion.i>}</div>)}</div></div><div className="result"><span><Check size={18}/></span><div><strong>12 photos found</strong><small>in 1,847 event photos</small></div><b>98.4%</b></div></motion.div></section>}
+
+import { motion } from "framer-motion";
+import { ArrowRight, Camera, Check, ScanFace, Sparkles } from "lucide-react";
+import { track } from "@/lib/analytics";
+
+const moments = ["arrival", "stage", "portrait", "crowd", "celebration"];
+
+export function Hero() {
+  return <section id="top" className="hero-inspired"><div className="shell hero-stage">
+    <motion.div className="hero-copy" initial={{opacity:0,y:20}} animate={{opacity:1,y:0}} transition={{duration:.65}}>
+      <p className="eyebrow"><span/> AI-powered photo discovery</p>
+      <h1>Every event photo.<br/><em>Already found.</em></h1>
+      <p className="lede">Upload one photo of yourself and let Imboni find your moments across thousands of event photos.</p>
+      <div className="actions"><a className="button" href="#waitlist" onClick={()=>track("hero_waitlist_clicked",{location:"hero"})}>Join the waitlist <ArrowRight size={18}/></a><a className="text-link" href="#how-it-works" onClick={()=>track("how_it_works_clicked")}>See how it works</a></div>
+    </motion.div>
+    <motion.div className="moment-gallery" initial={{opacity:0,y:28}} animate={{opacity:1,y:0}} transition={{duration:.8,delay:.15}} aria-label="A gallery of event moments being searched by Imboni">
+      {moments.map((moment,index)=><div className={`moment-card moment-${index+1}`} key={moment}><div className="moment-person"><span/><i/></div><span className="moment-label">{moment}</span>{[1,3].includes(index)&&<span className="match-pill"><Check size={12}/> Match</span>}</div>)}
+      <div className="scan-orbit"><ScanFace/><span>Searching 1,847 photos</span></div>
+    </motion.div>
+    <div className="hero-values"><article><ScanFace/><div><strong>Find yourself</strong><p>One reference photo starts the search.</p></div></article><article><Sparkles/><div><strong>Instant discovery</strong><p>Likely matches rise to the top.</p></div></article><article><Camera/><div><strong>Made for events</strong><p>From graduations to conferences.</p></div></article></div>
+  </div></section>;
+}
