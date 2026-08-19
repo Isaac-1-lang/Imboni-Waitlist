@@ -1,0 +1,2 @@
+export type AnalyticsEvent="hero_waitlist_clicked"|"waitlist_form_started"|"waitlist_submitted"|"how_it_works_clicked";
+export function track(event:AnalyticsEvent,properties:Record<string,unknown>={}){if(typeof window==="undefined")return;window.dispatchEvent(new CustomEvent("imboni:analytics",{detail:{event,properties,timestamp:new Date().toISOString()}}));if(process.env.NODE_ENV==="development")console.info("[Imboni analytics]",event,properties)}
